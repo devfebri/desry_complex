@@ -32,7 +32,13 @@
 
                         <div class="alert alert-primary">Data permintaan sedang dalam persetujuan manager dan senior manager</div>
                         @endif
+                        @if(auth()->user()->manager_id==null && auth()->user()->senior_manager_id==null)
+                        <div class="alert alert-primary">Akun ini belum memiliki Manager dan Senior Manger, silahkan hubungi operator/admin untuk menambahkan manager dan senior manager pada akun ini.</div>
+                        @endif
+
                     </div>
+                    @if(auth()->user()->manager_id!=null && auth()->user()->senior_manager_id!=null)
+
                     <form action="{{ route(auth()->user()->role.'_dashboardstore') }}" method="post" >
 
                         @csrf
@@ -117,17 +123,23 @@
                             </div>
                             <div class="callout callout-primary">
                                 <div class="row justify-content-md-center">
-                                    <div class="col-3">
+                                    <div class="col-lg-3 col-sm-12">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="gridCheck2" style="padding:10px;" name="approval_manager" disabled />
+                                            <input class="form-check-input" type="checkbox" id="gridCheck2" style="padding:10px;" @if($draft->count() != 0) @if($draft[0]->approval_manager=='disetujui') checked @endif @endif name="approval_manager" disabled />
+
+
                                             <h3 class="form-check-label" for="gridCheck2">
                                                 Manager
                                             </h3>
                                         </div>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-lg-3 col-sm-12">
+
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="gridCheck2" style="padding:10px;" name="approval_senior_manager" disabled />
+                                            <input class="form-check-input" type="checkbox" id="gridCheck2" style="padding:10px;" name="approval_senior_manager" @if($draft->count() != 0) @if($draft[0]->approval_senior_manager=='disetujui') checked @endif @endif disabled />
+
+
+
                                             <h3 class="form-check-label" for="gridCheck2">
                                                 Senior Manager
                                             </h3>
@@ -142,8 +154,8 @@
                             @if($draft->count() != 0)
 
                             <button type="submit" class="btn btn-warning" disabled>Simpan Draft</button>
-                             @if($draft[0]->status == 'Disetujui')
-                             <button type="button" class="btn btn-primary">Submit</button>
+                             @if($draft[0]->status == 'disetujui')
+                             <a href="{{ route(auth()->user()->role.'_prosesit',$draft[0]->id) }}" class="btn btn-primary">Submit</a>
                              @endif
 
                             @else
@@ -155,6 +167,7 @@
                         </div>
                         <!--end::Footer-->
                     </form>
+                    @endif
                     <!--end::Form-->
                 </div>
                 <!--end::Small Box Widget 1-->

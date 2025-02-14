@@ -19,17 +19,24 @@
             <!--begin::Sidebar Menu-->
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
                 @if(auth()->user()->role=='admin')
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route(auth()->user()->role.'_dashboard') }}" class="nav-link">
 
                         <i class="nav-icon bi bi-palette active"></i>
                         <p>Dashboard</p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="{{ route(auth()->user()->role.'_draft') }}" class="nav-link">
                         <i class="nav-icon bi bi-palette "></i>
                         <p>Draft</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route(auth()->user()->role.'_permintaankeseluruhan') }}" class="nav-link">
+                        <i class="nav-icon bi bi-palette "></i>
+                        <p>Permintaan Keseluruhan</p>
+
                     </a>
                 </li>
                 <li class="nav-item">
@@ -55,11 +62,35 @@
                         </li>
                     </ul>
                 </li>
-                @elseif(auth()->user()->role=='manager'))
+                @elseif(auth()->user()->role=='user')
+                <li class="nav-item">
+                    <a href="{{ route(auth()->user()->role.'_dashboard') }}" class="nav-link">
+
+                        <i class="nav-icon bi bi-palette active"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route(auth()->user()->role.'_draft') }}" class="nav-link">
+                        <i class="nav-icon bi bi-palette "></i>
+                        <p>Draft</p>
+                    </a>
+                </li>
+
+                @elseif(auth()->user()->role=='manager'||auth()->user()->role=='managersenior'))
                  <li class="nav-item">
                     <a href="{{ route(auth()->user()->role.'_draft') }}" class="nav-link">
                         <i class="nav-icon bi bi-palette "></i>
                         <p>Draft</p>
+                    </a>
+                </li>
+                @elseif(auth()->user()->role=='managerit'||auth()->user()->role=='managerseniorit'))
+
+                <li class="nav-item">
+                    <a href="{{ route(auth()->user()->role.'_permintaankeseluruhan') }}" class="nav-link">
+                        <i class="nav-icon bi bi-palette "></i>
+                        <p>Permintaan Keseluruhan</p>
+
                     </a>
                 </li>
                 @endif

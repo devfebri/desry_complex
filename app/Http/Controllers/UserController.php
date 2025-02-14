@@ -23,11 +23,11 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required',
+            'password' => 'required|min:6',
         ]);
-        // dd($request->all());
+
         User::create($request->all());
-        return redirect()->route(auth()->user()->role.'_user.index')->with('success', 'User created successfully.');
+        return redirect()->route('user.index')->with('success', 'User created successfully.');
     }
 
     public function edit(User $user)

@@ -23,6 +23,8 @@ class CreateDraftTable extends Migration
             $table->text('keterangan')->nullable();
             $table->string('approval_manager')->default('proses');
             $table->string('approval_senior_manager')->default('proses');
+            $table->string('approval_manager_it')->default('proses');
+            $table->string('approval_senior_manager_it')->default('proses');
             $table->string('status')->default('proses');
             $table->timestamps();
         });

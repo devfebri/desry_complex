@@ -13,9 +13,10 @@ class DashboardController extends Controller
     {
         $draft = Draft::where('user_id', auth()->user()->id)
                       ->where('status', 'proses')
+                      ->orWhere('status', 'disetujui')
                       ->get();
                     //   dd($draft[0]);
-        
+        // dd($draft);
         $permintaan = Permintaan::all();
         return view('dashboard', compact('permintaan','draft'));
     }
@@ -34,7 +35,6 @@ class DashboardController extends Controller
             $permintaan = new DraftPermintaan();
             $permintaan->draft_id = $draft->id;
             $permintaan->permintaan_id = $row;
-            $permintaan->approval = 'proses';
             $permintaan->save();
         }
 

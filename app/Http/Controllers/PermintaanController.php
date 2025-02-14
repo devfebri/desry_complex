@@ -55,4 +55,6 @@ class PermintaanController extends Controller
 
         return redirect()->route(auth()->user()->role.'_permintaan.index')->with('success', 'Data permintaan berhasil dihapus.');
     }
+
+    
 }

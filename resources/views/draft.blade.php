@@ -33,8 +33,10 @@
                                     <th rowspan="2">Nama</th>
                                     <th rowspan="2">Permintaan</th>
                                     <th colspan="2">Persetujuan</th>
-                                    <th rowspan="2">status</th>
-                                    <th rowspan="2">Aksi</th>
+                                    <th rowspan="2">Status</th>
+                                    @if(auth()->user()->role == 'manager'||auth()->user()->role == 'managersenior')
+                                    <th rowspan="2">Approval</th>
+                                    @endif
                                 </tr>
                                 <tr>
                                     <th>Manager</th>
@@ -58,22 +60,17 @@
                                     <td>{{ $draft->approval_manager }}</td>
                                     <td>{{ $draft->approval_senior_manager }}</td>
                                     <td>{{ $draft->status }}</td>
+                                    @if(auth()->user()->role == 'manager' || auth()->user()->role == 'managersenior')
 
                                     <td>
+                                        @if(auth()->user()->role == 'manager' && $draft->approval_manager == 'proses'||auth()->user()->role == 'managersenior' && $draft->approval_senior_manager == 'proses')
+
+                                        <a href="{{ route(auth()->user()->role.'_permohonan_disetujui',$draft->id) }}"  style="margin: 5px;" onclick="return confirm('Apakah anda yakin ingin menyetujui permohonan ini ?')" data-toggle="tooltip" data-placement="top" title="" data-original-title="Setujui" class="tabledit-edit-button btn btn-sm btn-success edit"><span class="bi bi-check-lg"></span></a>
+                                        <a href="{{ route(auth()->user()->role.'_permohonan_tidak_disetujui',$draft->id) }}" style="margin: 5px;" onclick="return confirm('Apakah anda yakin tidak menyetujui permohonan ini ?')" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tidak disetujui" class="tabledit-edit-button btn btn-sm btn-danger"><span class="bi bi-x-lg"></span></a>
                                         
-                                        @if($draft->status == 'proses')
-                                        <button style="margin: 5px;" id="btnsetuju" data-id="{{ $draft->id }}" data-original-title="Setujui" class="tabledit-edit-button btn btn-sm btn-success edit"><i class="bi bi-check-lg"></i></button>
-
-
-
-
-
-                                        <a href="#" style="margin: 5px;" onclick="return confirm('Apakah anda yakin ?')" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tidak disetujui" class="tabledit-edit-button btn btn-sm btn-danger"><span class="bi bi-x-lg"></span></a>
-
-
                                         @endif
                                     </td>
-
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -97,7 +94,10 @@
 @section('script')
 <script>
     $(document).ready(function() {
-        $('#draftTable').DataTable();
+        $('#draftTable').DataTable({
+            "scrollX": true
+        });
+
     });
 </script>
 @endsection

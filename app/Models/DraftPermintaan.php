@@ -10,7 +10,7 @@ class DraftPermintaan extends Model
 {
     use HasFactory;
     protected $table='draft_permintaan';
-    protected $fillable=['approval'];
+    protected $fillable=['approval_manager_it','approval_senior_manager_it','draft_id','permintaan_id','status'];
 
     public function permintaan()
     {

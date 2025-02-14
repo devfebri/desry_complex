@@ -31,13 +31,17 @@ class AuthController extends Controller
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
         //    dd('ok');
            
-            if(Auth::user()->role=='manager'){
-                return redirect(route(auth()->user()->role.'_draft'))->with('pesan','Selamat datang kembali "'.auth()->user()->name.'"');
-
-            }else{
-
+            if(Auth::user()->role=='user'){
                 return redirect(route(auth()->user()->role.'_dashboard'))->with('pesan','Selamat datang kembali "'.auth()->user()->name.'"');
+
             }
+            else if(Auth::user()->role=='manager' || Auth::user()->role=='managersenior'||Auth::user()->role=='admin'){ 
+                return redirect(route(auth()->user()->role.'_draft'))->with('pesan','Selamat datang kembali "'.auth()->user()->name.'"');
+            }
+            else if(Auth::user()->role=='managerit' || Auth::user()->role=='managerseniorit'){ 
+                return redirect(route(auth()->user()->role.'_permintaankeseluruhan'))->with('pesan','Selamat datang kembali "'.auth()->user()->name.'"');
+            }
+            
         } else {
             return redirect('/')->with('gagal','Periksa Username dan Password anda');
         }

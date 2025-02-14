@@ -17,7 +17,9 @@ class CreateDraftPermintaanTable extends Migration
             $table->id();
             $table->unsignedBigInteger('draft_id');
             $table->unsignedBigInteger('permintaan_id');
-            $table->string('approval');
+            $table->string('approval_manager_it')->default('proses');
+            $table->string('approval_senior_manager_it')->default('proses');
+            $table->string('status')->default('proses');
             $table->timestamps();
         });
     }

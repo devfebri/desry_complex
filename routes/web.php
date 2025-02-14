@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DraftController;
 use App\Http\Controllers\PermintaanController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PermintaanKeseluruhanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,21 +33,41 @@ Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::prefix('admin')->middleware('auth', 'role:admin')->name('admin_')->group(function () {
-
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::post('/dashboard/store', [DashboardController::class, 'store'])->name('dashboardstore');
+    // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Route::post('/dashboard/store', [DashboardController::class, 'store'])->name('dashboardstore');
     Route::get('/draft', [DraftController::class, 'index'])->name('draft');
     Route::resource('permintaan', PermintaanController::class);
-Route::resource('user', UserController::class);
+    Route::resource('user', UserController::class);
+     Route::get('/permintaankeseluruhan', [PermintaanKeseluruhanController::class, 'index'])->name('permintaankeseluruhan');
 });
+
 Route::prefix('user')->middleware('auth', 'role:user')->name('user_')->group(function () {
-
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
+     Route::post('/dashboard/store', [DashboardController::class, 'store'])->name('dashboardstore');
+    Route::get('/draft', [DraftController::class, 'index'])->name('draft');
+    Route::get('/prosesit/{id}', [DraftController::class, 'prosesit'])->name('prosesit');
 });
+
 Route::prefix('manager')->middleware('auth', 'role:manager')->name('manager_')->group(function () {
+    Route::get('/draft', [DraftController::class, 'index'])->name('draft');
+    Route::get('/permohonan/{id}/disetujui', [DraftController::class, 'disetujui'])->name('permohonan_disetujui');
+    Route::get('/permohonan/{id}/tidakdisetujui', [DraftController::class, 'tidakdisetujui'])->name('permohonan_tidak_disetujui');
+});
 
-   Route::get('/draft', [DraftController::class, 'index'])->name('draft');
+Route::prefix('managersenior')->middleware('auth', 'role:managersenior')->name('managersenior_')->group(function () {
+    Route::get('/draft', [DraftController::class, 'index'])->name('draft');
+    Route::get('/permohonan/{id}/disetujui', [DraftController::class, 'disetujui'])->name('permohonan_disetujui');
+    Route::get('/permohonan/{id}/tidakdisetujui', [DraftController::class, 'tidakdisetujui'])->name('permohonan_tidak_disetujui');
+});
 
+Route::prefix('managerit')->middleware('auth', 'role:managerit')->name('managerit_')->group(function () {
+    Route::get('/permintaankeseluruhan', [PermintaanKeseluruhanController::class, 'index'])->name('permintaankeseluruhan');
+    Route::get('/permintaankeseluruhan/{id}/detail', [PermintaanKeseluruhanController::class, 'detail'])->name('permintaankeseluruhan_detail');
+    Route::post('/permintaankeseluruhan/submit', [PermintaanKeseluruhanController::class, 'submit'])->name('permintaankeseluruhan_submit');
+});
+Route::prefix('managerseniorit')->middleware('auth', 'role:managerseniorit')->name('managerseniorit_')->group(function () {
+    Route::get('/permintaankeseluruhan', [PermintaanKeseluruhanController::class, 'index'])->name('permintaankeseluruhan');
+    Route::get('/permintaankeseluruhan/{id}/detail', [PermintaanKeseluruhanController::class, 'detail'])->name('permintaankeseluruhan_detail');
+    Route::post('/permintaankeseluruhan/submit', [PermintaanKeseluruhanController::class, 'submit'])->name('permintaankeseluruhan_submit');
 });
 

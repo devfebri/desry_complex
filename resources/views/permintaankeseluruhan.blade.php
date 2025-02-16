@@ -93,7 +93,6 @@
         $('#draftTable').DataTable({
             "scrollX": true
         });
-
     });
 
 </script>

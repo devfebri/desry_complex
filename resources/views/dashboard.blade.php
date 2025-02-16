@@ -69,11 +69,9 @@
                                 <div class="col-sm-10">
                                     @foreach($permintaan as $item)
                                         @if($draft->count() != 0)
-                                            @php
-                                                $data = \App\Models\DraftPermintaan::where('permintaan_id', $item->id)->count();
-                                            @endphp
+                                           
                                             <div class="form-check">
-                                                <input class="form-check-input" @if($data != 0) checked @endif type="checkbox" id="permintaan{{ $item->id }}" name="permintaan[]" value="{{ $item->id }}" />
+                                                <input class="form-check-input" @if($item->cek == 1) checked @endif type="checkbox" id="permintaan{{ $item->id }}" name="permintaan[]" value="{{ $item->id }}" />
                                                 <label class="form-check-label" for="permintaan{{ $item->id }}">
                                                     {{ $item->nama }}
                                                 </label>

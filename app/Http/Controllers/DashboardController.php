@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Permintaan;
 use App\Models\Draft;
 use App\Models\DraftPermintaan;
+use Illuminate\Support\Facades\DB;
 use PDF;
 
 
@@ -17,9 +18,12 @@ class DashboardController extends Controller
                       ->where('status', 'proses')
                       ->orWhere('status', 'disetujui')
                       ->get();
+
+                      $permintaan = db::select("select *,(select count(id) from draft_permintaan dp where dp.draft_id =".$draft[0]->id." and dp.permintaan_id=p.id)as cek from permintaans p");
+                    //   dd($permintaan);
                     //   dd($draft[0]);
         // dd($draft);
-        $permintaan = Permintaan::all();
+        // $permintaan = Permintaan::all();
         return view('dashboard', compact('permintaan','draft'));
     }
     public function store(Request $request)

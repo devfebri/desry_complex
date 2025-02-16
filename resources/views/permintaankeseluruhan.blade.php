@@ -58,7 +58,7 @@
                                         @endforeach
                                     </td>
                                     <td>{{ $draft->status }}</td>
-                                    <td>{{ $draft->waktu_pengambilan->translatedFormat('l, d-m-Y') }}</td>
+                                    <td>@if($draft->waktu_pengambilan){{ $draft->waktu_pengambilan->translatedFormat('l, d-m-Y') }}@endif</td>
 
                                     @if(auth()->user()->role == 'managerit'||auth()->user()->role == 'managerseniorit'||auth()->user()->role == 'admin'||auth()->user()->role == 'user')
 

@@ -33,6 +33,7 @@
                                     <th>Nama</th>
                                     <th>Permintaan</th>
                                     <th>Status</th>
+                                    <th>Waktu Pengambilan</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -57,7 +58,10 @@
                                         @endforeach
                                     </td>
                                     <td>{{ $draft->status }}</td>
-                                    @if(auth()->user()->role == 'managerit'||auth()->user()->role == 'managerseniorit')
+                                    <td>{{ $draft->waktu_pengambilan->translatedFormat('l, d-m-Y') }}</td>
+
+                                    @if(auth()->user()->role == 'managerit'||auth()->user()->role == 'managerseniorit'||auth()->user()->role == 'admin'||auth()->user()->role == 'user')
+
 
                                     <td>
                                         <a href="{{ route(auth()->user()->role.'_permintaankeseluruhan_detail',$draft->id) }}" style="margin: 5px;" class="tabledit-edit-button btn btn-sm btn-success edit"><span class="bi bi-card-checklist"></span></a>

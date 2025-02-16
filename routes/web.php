@@ -39,6 +39,9 @@ Route::prefix('admin')->middleware('auth', 'role:admin')->name('admin_')->group(
     Route::resource('permintaan', PermintaanController::class);
     Route::resource('user', UserController::class);
      Route::get('/permintaankeseluruhan', [PermintaanKeseluruhanController::class, 'index'])->name('permintaankeseluruhan');
+         Route::get('/permintaankeseluruhan/{id}/detail', [PermintaanKeseluruhanController::class, 'detail'])->name('permintaankeseluruhan_detail');
+         
+    Route::post('/permintaankeseluruhan/submit', [PermintaanKeseluruhanController::class, 'submit'])->name('permintaankeseluruhan_submit');
 });
 
 Route::prefix('user')->middleware('auth', 'role:user')->name('user_')->group(function () {
@@ -46,6 +49,11 @@ Route::prefix('user')->middleware('auth', 'role:user')->name('user_')->group(fun
      Route::post('/dashboard/store', [DashboardController::class, 'store'])->name('dashboardstore');
     Route::get('/draft', [DraftController::class, 'index'])->name('draft');
     Route::get('/prosesit/{id}', [DraftController::class, 'prosesit'])->name('prosesit');
+    Route::get('/dashboard/preview-pdf/{id}', [DashboardController::class, 'previewPdf'])->name('preview_pdf');
+
+
+    Route::get('/permintaankeseluruhan', [PermintaanKeseluruhanController::class, 'index'])->name('permintaankeseluruhan');
+    Route::get('/permintaankeseluruhan/{id}/detail', [PermintaanKeseluruhanController::class, 'detail'])->name('permintaankeseluruhan_detail');
 });
 
 Route::prefix('manager')->middleware('auth', 'role:manager')->name('manager_')->group(function () {

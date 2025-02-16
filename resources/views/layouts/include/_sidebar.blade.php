@@ -76,6 +76,14 @@
                         <p>Draft</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route(auth()->user()->role.'_permintaankeseluruhan') }}" class="nav-link">
+                        <i class="nav-icon bi bi-palette "></i>
+                        <p>Permintaan Keseluruhan</p>
+
+                    </a>
+                </li>
+
 
                 @elseif(auth()->user()->role=='manager'||auth()->user()->role=='managersenior'))
                  <li class="nav-item">

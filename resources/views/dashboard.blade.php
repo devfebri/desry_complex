@@ -153,6 +153,8 @@
                         <div class="card-body text-center">
                             @if($draft->count() != 0)
 
+                            <a href='{{ route(auth()->user()->role.'_preview_pdf', $draft[0]->id) }}' target="_blank" class="btn btn-warning">Preview</a>
+
                             <button type="submit" class="btn btn-warning" disabled>Simpan Draft</button>
                              @if($draft[0]->status == 'disetujui')
                              <a href="{{ route(auth()->user()->role.'_prosesit',$draft[0]->id) }}" class="btn btn-primary">Submit</a>

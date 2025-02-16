@@ -63,7 +63,7 @@
                                     @if(auth()->user()->role == 'manager' || auth()->user()->role == 'managersenior')
 
                                     <td>
-                                        @if(auth()->user()->role == 'manager' && $draft->approval_manager == 'proses'||auth()->user()->role == 'managersenior' && $draft->approval_senior_manager == 'proses')
+                                        @if(auth()->user()->role == 'manager' && $draft->approval_manager == 'proses'||auth()->user()->role == 'managersenior' && $draft->approval_senior_manager == 'proses'&&$draft->status!='tidak disetujui')
 
                                         <a href="{{ route(auth()->user()->role.'_permohonan_disetujui',$draft->id) }}"  style="margin: 5px;" onclick="return confirm('Apakah anda yakin ingin menyetujui permohonan ini ?')" data-toggle="tooltip" data-placement="top" title="" data-original-title="Setujui" class="tabledit-edit-button btn btn-sm btn-success edit"><span class="bi bi-check-lg"></span></a>
                                         <a href="{{ route(auth()->user()->role.'_permohonan_tidak_disetujui',$draft->id) }}" style="margin: 5px;" onclick="return confirm('Apakah anda yakin tidak menyetujui permohonan ini ?')" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tidak disetujui" class="tabledit-edit-button btn btn-sm btn-danger"><span class="bi bi-x-lg"></span></a>

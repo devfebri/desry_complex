@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Permintaan;
 use App\Models\Draft;
 use App\Models\DraftPermintaan;
+use PDF;
+
 
 class DashboardController extends Controller
 {
@@ -40,4 +42,16 @@ class DashboardController extends Controller
 
         return back()->with('success', 'Draft saved successfully!');
     }
+    
+    public function previewPdf($id)
+    {
+        // dd($id);
+        $data = Draft::find($id);
+        $dp=DraftPermintaan::where('draft_id',$data->id)->get();
+        $pdf = PDF::loadView('pdf.draftpreview', compact('data','dp'));
+        // $pdf->setPaper('A4', 'landscape');
+        $pdf->render();
+        return $pdf->stream();
+    }
+
 }

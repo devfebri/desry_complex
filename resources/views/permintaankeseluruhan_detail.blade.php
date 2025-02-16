@@ -24,19 +24,21 @@
             <div class="col-md-12">
                 <div class="card mb-4">
                     <!-- /.card-header -->
+                    @if(auth()->user()->role!='user')
                     <form action="{{ route(auth()->user()->role.'_permintaankeseluruhan_submit') }}" method="post">
+                        @endif
                         @csrf
                         <div class="card-body">
                             <div class=" m-b-20">
-                                <div class="row text-center" >
-                                    <div @if($data->approval_manager=='disetujui') style="background-color: rgb(89, 255, 89);" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-3" >
+                                <div class="row text-center justify-content-center" >
+                                    <div @if($data->approval_manager=='disetujui') style="background-color: rgb(89, 255, 89);" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2" >
 
                                         <div class="card-body">
                                             <b>Manager</b> <br>
                                             <h5 class="badge badge-pill badge-success"><b><i>{{ $data->approval_manager }}</i></b> </h5>
                                         </div>
                                     </div>
-                                    <div @if($data->approval_senior_manager=='disetujui') style="background-color: rgb(89, 255, 89);" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-3" >
+                                    <div @if($data->approval_senior_manager=='disetujui') style="background-color: rgb(89, 255, 89);" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2" >
 
                                         <div class="card-body">
                                             <b>Senior Manager</b> <br>
@@ -44,7 +46,16 @@
 
                                         </div>
                                     </div>
-                                    <div @if($data->approval_manager_it=='selesai') style="background-color: rgb(89, 255, 89);" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-3">
+                                     <div @if($data->approval_teknisi=='selesai') style="background-color: rgb(89, 255, 89);" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2">
+
+                                         <div class="card-body">
+                                             <b>Teknisi</b> <br>
+                                             <h5 class="badge badge-pill badge-success"><b><i>{{ $data->approval_teknisi }}</i></b> </h5>
+
+                                         </div>
+                                     </div>
+
+                                    <div @if($data->approval_manager_it=='selesai') style="background-color: rgb(89, 255, 89);" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2">
 
                                         <div class="card-body">
                                             <b>Manager IT</b> <br>
@@ -52,7 +63,7 @@
 
                                         </div>
                                     </div>
-                                    <div @if($data->approval_senior_manager_it=='selesai') style="background-color: rgb(89, 255, 89);" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-3">
+                                    <div @if($data->approval_senior_manager_it=='disetujui') style="background-color: rgb(89, 255, 89);" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-3">
 
 
 
@@ -112,50 +123,85 @@
                                     </table>
 
                                 </div>
-                                
+                                @if($data->waktu_pengambilan != null)
+                                <div class="col-sm-12 col-lg-5">
+                                    <div class="card  bg-info text-center">
+                                        <div class="card-body">
 
-                                
+                                            <h5 class="card-text">Waktu Pengambilan :<br>{{ $data->waktu_pengambilan->translatedFormat('l, d-m-Y') }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
                             </div>
                             <div class="row justify-content-center mt-2">
+                                @if(auth()->user()->role=='managerit' ||  auth()->user()->role=='admin')
+                                    <div class="col-sm-12 col-lg-3">
+                                        <div class="form-check ">
+                                            @if($data->approval_manager_it=='proses' && auth()->user()->role=='managerit')
+
+                                            <input class="form-check-input" type="radio" name="setingtable" id="setingtable1" value="disetujui"   />
+                                            @elseif($data->approval_teknisi=='proses'&& auth()->user()->role=='admin')
+
+                                            <input class="form-check-input" type="radio" name="setingtable" id="setingtable1" value="disetujui"  />
+                                            @else
+                                            <input class="form-check-input" type="radio" name="setingtable" id="setingtable1" value="disetujui" disabled />
+                                            @endif
+                                            <label class="form-check-label" for="setingtable1"> Disetujui Semua </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-lg-3">
+                                        <div class="form-check ">
+                                            @if($data->approval_manager_it=='proses'&& auth()->user()->role=='managerit' )
+                                            <input class="form-check-input" type="radio" name="setingtable" id="setingtable2" value="tidak disetujui"  />
+                                            @elseif($data->approval_teknisi=='proses'&& auth()->user()->role=='admin')
+                                            <input class="form-check-input" type="radio" name="setingtable" id="setingtable2" value="tidak disetujui"  />
+                                            @else
+                                            <input class="form-check-input" type="radio" name="setingtable" id="setingtable2" value="tidak disetujui"   disabled/>
+                                            @endif
+                                            <label class="form-check-label" for="setingtable2"> Tidak Disetujui Semua </label>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-lg-3">
+                                        <div class="form-check ">
+                                            @if($data->approval_manager_it=='proses'&& auth()->user()->role=='managerit')
+                                            <input class="form-check-input" type="radio" name="setingtable" id="setingtable3" value="parsial" checked />
+                                            @elseif($data->approval_teknisi=='proses' && auth()->user()->role=='admin')
+                                            <input class="form-check-input" type="radio" name="setingtable" id="setingtable3" value="parsial" checked />
+                                            @else
+                                            <input class="form-check-input" type="radio" name="setingtable" id="setingtable3" value="parsial" disabled  />
+                                            @endif
+                                            <label class="form-check-label" for="setingtable3"> Parsial </label>
+
+                                        </div>
+                                    </div>
+                                @elseif(auth()->user()->role=='managerseniorit')
                                 <div class="col-sm-12 col-lg-3">
                                     <div class="form-check ">
-                                        @if($data->approval_manager_it=='proses')
-                                        <input class="form-check-input" type="radio" name="setingtable" id="setingtable1" value="disetujui"   />
-                                        @elseif($data->approval_senior_manager_it=='proses')
-                                        <input class="form-check-input" type="radio" name="setingtable" id="setingtable1" value="disetujui"  />
+                                        @if($data->approval_senior_manager_it=='proses')
+                                        <input class="form-check-input" type="radio" name="setingtable" id="acc" value="disetujui" required />
                                         @else
-                                        <input class="form-check-input" type="radio" name="setingtable" id="setingtable1" value="disetujui" disabled />
+                                        <input class="form-check-input" type="radio" name="setingtable" id="acc" value="disetujui" disabled required />
 
                                         @endif
-                                        <label class="form-check-label" for="setingtable1"> Disetujui Semua </label>
+                                        <label class="form-check-label" for="acc"> Terima Permohonan </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-lg-3">
                                     <div class="form-check ">
-                                        @if($data->approval_manager_it=='proses' )
-                                        <input class="form-check-input" type="radio" name="setingtable" id="setingtable2" value="tidak disetujui"  />
-                                        @elseif($data->approval_senior_manager_it=='proses')
-                                        <input class="form-check-input" type="radio" name="setingtable" id="setingtable2" value="tidak disetujui"  />
+                                        @if($data->approval_senior_manager_it=='proses')
+                                        <input class="form-check-input" type="radio" name="setingtable" id="tolak" value="tidak disetujui" required />
                                         @else
-                                        <input class="form-check-input" type="radio" name="setingtable" id="setingtable2" value="tidak disetujui"   disabled/>
-                                        @endif
-                                        <label class="form-check-label" for="setingtable2"> Tidak Disetujui Semua </label>
+                                        <input class="form-check-input" type="radio" name="setingtable" id="tolak" value="tidak disetujui" disabled required />
 
+
+                                        @endif
+                                        <label class="form-check-label" for="tolak"> Tolak Permohonan </label>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-lg-3">
-                                    <div class="form-check ">
-                                        @if($data->approval_manager_i=='proses')
-                                        <input class="form-check-input" type="radio" name="setingtable" id="setingtable3" value="parsial" checked />
-                                        @elseif($data->approval_senior_manager_it=='proses')
-                                        <input class="form-check-input" type="radio" name="setingtable" id="setingtable3" value="parsial" checked />
-                                        @else
-                                        <input class="form-check-input" type="radio" name="setingtable" id="setingtable3" value="parsial" disabled  />
-                                        @endif
-                                        <label class="form-check-label" for="setingtable3"> Parsial </label>
 
-                                    </div>
-                                </div>
+                                @endif
 
                             </div>
                             <input type="hidden" name="draft_id" value="{{ $data->id }}">
@@ -164,8 +210,8 @@
                                     <tr>
                                         <th rowspan="2">No</th>
                                         <th rowspan="2">Permintaan</th>
+                                        <th colspan="2">Approval Teknisi</th>
                                         <th colspan="2">Approval Manager IT</th>
-                                        <th colspan="2">Approval Senior Manager IT</th>
                                         <th rowspan="2">Status</th>
                                     </tr>
                                     <tr>
@@ -178,29 +224,35 @@
                                 <tbody>
                                     @foreach($drafts as $key=>$draft)
                                     <tr>
-                                        <td>{{ ++$key }}</td>
-                                        <td>{{ $draft->permintaan->nama }}</td>
-                                        <td><center><input type="radio" approval='settingtable' role='managerit' value='disetujui' @if(auth()->user()->role!='managerit') disabled @endif @if($draft->approval_manager_it=='disetujui') checked disabled @endif name="app-m-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
-                                        <td><center><input type="radio" approval='settingtable' role='managerit' value='tidak disetujui' @if(auth()->user()->role!='managerit') disabled @endif @if($draft->approval_manager_it=='tidak disetujui') checked disabled @endif name="app-m-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
-                                        <td><center><input type="radio" approval='settingtable' role='managerseniorit' value='disetujui' @if(auth()->user()->role!='managerseniorit') disabled @endif @if($draft->approval_senior_manager_it=='disetujui') checked disabled @endif  name="app-s-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
-                                        <td><center><input type="radio" approval='settingtable' role='managerseniorit' value='tidak disetujui' @if(auth()->user()->role!='managerseniorit') disabled @endif @if($draft->approval_senior_manager_it=='tidak disetujui') checked disabled @endif name="app-s-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
-                                        <td>{{$draft->status}}</td>
+                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif>{{ ++$key }}</td>
+                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif>{{ $draft->permintaan->nama }}</td>
+                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif><center><input type="radio" required approval='settingtable' role='admin' value='disetujui' @if(auth()->user()->role!='admin') disabled @endif @if($draft->approval_teknisi=='disetujui') checked disabled @endif  name="app-s-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
+                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif><center><input type="radio" required approval='settingtable' role='admin' value='tidak disetujui' @if(auth()->user()->role!='admin') disabled @endif @if($draft->approval_teknisi=='tidak disetujui') checked disabled @endif name="app-s-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
+                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif><center><input type="radio" required approval='settingtable' role='managerit' value='disetujui' @if(auth()->user()->role!='managerit') disabled @endif @if($draft->approval_manager_it=='disetujui') checked disabled @endif name="app-m-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
+                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif><center><input type="radio" required approval='settingtable' role='managerit' value='tidak disetujui' @if(auth()->user()->role!='managerit') disabled @endif @if($draft->approval_manager_it=='tidak disetujui') checked disabled @endif name="app-m-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
+                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif>{{$draft->status}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            @if($data->approval_manager_it=='proses' )
+                            @if($data->approval_manager_it=='proses' && auth()->user()->role=='managerit')
                             <button type="submit" class="btn btn-primary btn-block col-12">Simpan</button>
 
 
-                            @elseif($data->approval_senior_manager_it=='proses')
+                            @elseif($data->approval_teknisi=='proses'&& auth()->user()->role=='admin')
 
+
+                            <button type="submit" class="btn btn-primary btn-block col-12" >Simpan</button>
+                            @elseif($data->approval_senior_manager_it=='proses'&& auth()->user()->role=='managerseniorit')
                             <button type="submit" class="btn btn-primary btn-block col-12">Simpan</button>
+                            @elseif(auth()->user()->role=='user')
                             @else
                             <button type="submit" class="btn btn-primary btn-block col-12" disabled>Simpan</button>
                             @endif
                         </div>
+                        @if(auth()->user()->role=='user')
                     </form>
+                    @endif
 
                    
                 </div>
@@ -225,16 +277,16 @@
         $('#setingtable1').on('click', function() {
             if(role=='managerit'){
                 $('input[type=radio][value=disetujui][role=managerit]').prop('checked', true);
-            }else if(role=='managerseniorit'){
-                $('input[type=radio][value=disetujui][role=managerseniorit]').prop('checked', true);
+            }else if(role=='admin'){
+                $('input[type=radio][value=disetujui][role=admin]').prop('checked', true);
             }
             $('input[type=radio][approval=settingtable]').prop('disabled',true);
         });
         $('#setingtable2').on('click', function() {
             if(role=='managerit'){
                 $('input[type=radio][value="tidak disetujui"][role=managerit]').prop('checked', true);
-            }else if(role=='managerseniorit'){
-                $('input[type=radio][value="tidak disetujui"][role=managerseniorit]').prop('checked', true);
+            }else if(role=='admin'){
+                $('input[type=radio][value="tidak disetujui"][role=admin]').prop('checked', true);
             }
             $('input[type=radio][approval=settingtable]').prop('disabled',true);
 
@@ -242,9 +294,9 @@
         $('#setingtable3').on('click', function() {
             if(role=='managerit'){
                 $('input[type=radio][role=managerit]').prop('disabled',false);
-                $('input[type=radio][role=managerseniorit]').prop('disabled',true);
-            }else if(role=='managerseniorit'){
-                $('input[type=radio][role=managerseniorit]').prop('disabled',false);
+                $('input[type=radio][role=admin]').prop('disabled',true);
+            }else if(role=='admin'){
+                $('input[type=radio][role=admin]').prop('disabled',false);
                 $('input[type=radio][role=managerit]').prop('disabled',true);
             }
         });

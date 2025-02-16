@@ -24,7 +24,9 @@ class CreateDraftTable extends Migration
             $table->string('approval_manager')->default('proses');
             $table->string('approval_senior_manager')->default('proses');
             $table->string('approval_manager_it')->default('proses');
+            $table->string('approval_teknisi')->default('proses');
             $table->string('approval_senior_manager_it')->default('proses');
+            $table->date('waktu_pengambilan')->nullable();
             $table->string('status')->default('proses');
             $table->timestamps();
         });

@@ -85,19 +85,14 @@
 
 
                                         <tr>
-                                            <td><b>Nama</b></td>
+                                            <td><b>Nama Pemohon</b></td>
                                             <td>:</td>
-                                            <td>{{ $data->nama }}</td>
+                                            <td>{{ $data->nama_pemohon }}</td>
                                         </tr>
                                         <tr>
-                                            <td><b>NPP</b> </td>
+                                            <td><b>Kontak Pemohon</b> </td>
                                             <td>:</td>
-                                            <td>{{ $data->npp }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>Keterangan</b> </td>
-                                            <td>:</td>
-                                            <td>{{ $data->keterangan }}</td>
+                                            <td>{{ $data->kontak_pemohon }}</td>
                                         </tr>
                                     </table>
 
@@ -209,7 +204,10 @@
                                 <thead>
                                     <tr>
                                         <th rowspan="2">No</th>
+                                        <th rowspan="2">Nama</th>
+                                        <th rowspan="2">NPP</th>
                                         <th rowspan="2">Permintaan</th>
+                                        <th rowspan="2">Keterangan</th>
                                         <th colspan="2">Approval Teknisi</th>
                                         <th colspan="2">Approval Manager IT</th>
                                         <th rowspan="2">Status</th>
@@ -225,7 +223,10 @@
                                     @foreach($drafts as $key=>$draft)
                                     <tr>
                                         <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif>{{ ++$key }}</td>
+                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif>{{ $draft->nama}}</td>
+                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif>{{ $draft->npp}}</td>
                                         <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif>{{ $draft->permintaan->nama }}</td>
+                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif>{{ $draft->keterangan }}</td>
                                         <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif><center><input type="radio" required approval='settingtable' role='admin' value='disetujui' @if(auth()->user()->role!='admin') disabled @endif @if($draft->approval_teknisi=='disetujui') checked disabled @endif  name="app-s-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
                                         <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif><center><input type="radio" required approval='settingtable' role='admin' value='tidak disetujui' @if(auth()->user()->role!='admin') disabled @endif @if($draft->approval_teknisi=='tidak disetujui') checked disabled @endif name="app-s-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
                                         <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif><center><input type="radio" required approval='settingtable' role='managerit' value='disetujui' @if(auth()->user()->role!='managerit') disabled @endif @if($draft->approval_manager_it=='disetujui') checked disabled @endif name="app-m-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
@@ -272,7 +273,22 @@
         var role = @json(auth()->user()->role);
         // alert(role);
         $('#draftTable').DataTable({
-            "scrollX": true
+            "scrollX": true,
+            "scrollCollapse": true,
+            "paging": true,
+            "autoWidth": false,
+            "columnDefs": [
+                { "width": "10%", "targets": 0 },
+                { "width": "20%", "targets": 1 },
+                { "width": "10%", "targets": 2 },
+                { "width": "20%", "targets": 3 },
+                { "width": "20%", "targets": 4 },
+                { "width": "10%", "targets": 5 },
+                { "width": "10%", "targets": 6 },
+                { "width": "10%", "targets": 7 },
+                { "width": "10%", "targets": 8 },
+                { "width": "10%", "targets": 9 }
+            ]
         });
         $('#setingtable1').on('click', function() {
             if(role=='managerit'){

@@ -29,9 +29,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>NPP</th>
-                                    <th>Nama</th>
-                                    <th>Permintaan</th>
+                                    <th>Nama Pemohon</th>
+                                    <th>Kontak Pemohon</th>
                                     <th>Status</th>
                                     <th>Waktu Pengambilan</th>
                                     <th>Action</th>
@@ -41,22 +40,9 @@
                                 @foreach($drafts as $key=>$draft)
                                 <tr>
                                     <td>{{ ++$key }}</td>
-                                    <td>{{ $draft->npp }}</td>
-                                    <td>{{ $draft->nama }}</td>
-                                    <td>
-                                        @php
-                                        $data=\App\Models\DraftPermintaan::where('draft_id',$draft->id)->get();
-                                        @endphp
-                                        @foreach($data as $row)
-                                        @if($row->status=='proses')
-                                        <span class="badge text-bg-primary">{{$row->permintaan->nama}}</span>
-                                        @elseif($row->status=='disetujui')
-                                        <span class="badge text-bg-success">{{$row->permintaan->nama}}</span>
-                                         @elseif($row->status=='tidak disetujui')
-                                        <span class="badge text-bg-danger">{{$row->permintaan->nama}}</span>
-                                        @endif
-                                        @endforeach
-                                    </td>
+                                    <td>{{ $draft->nama_pemohon }}</td>
+                                    <td>{{ $draft->kontak_pemohon }}</td>
+                                   
                                     <td>{{ $draft->status }}</td>
                                     <td>@if($draft->waktu_pengambilan){{ $draft->waktu_pengambilan->translatedFormat('l, d-m-Y') }}@endif</td>
 

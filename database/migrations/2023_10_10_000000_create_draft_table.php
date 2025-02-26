@@ -16,11 +16,10 @@ class CreateDraftTable extends Migration
         Schema::create('draft', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('npp');
-            $table->string('nama');
+            $table->string('nama_pemohon');
+            $table->string('kontak_pemohon');
             $table->string('devisi')->nullable();
             $table->string('sub_devisi')->nullable();
-            $table->text('keterangan')->nullable();
             $table->string('approval_manager')->default('proses');
             $table->string('approval_senior_manager')->default('proses');
             $table->string('approval_manager_it')->default('proses');

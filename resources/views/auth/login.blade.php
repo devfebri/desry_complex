@@ -1,152 +1,103 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <!--begin::Head-->
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
     <title>Login</title>
-    <!--begin::Primary Meta Tags-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="title" content="Login Page" />
-    <meta name="author" content="ColorlibHQ" />
-    <meta
-      name="description"
-      content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS."
-    />
-    <meta
-      name="keywords"
-      content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard"
-    />
-    <!--end::Primary Meta Tags-->
-    <!--begin::Fonts-->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
-      integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q="
-      crossorigin="anonymous"
-    />
-    <!--end::Fonts-->
-    <!--begin::Third Party Plugin(OverlayScrollbars)-->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css"
-      integrity="sha256-tZHrRjVqNSRyWg2wbppGnT833E/Ys0DHWGwT04GiqQg="
-      crossorigin="anonymous"
-    />
-    <!--end::Third Party Plugin(OverlayScrollbars)-->
-    <!--begin::Third Party Plugin(Bootstrap Icons)-->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-      integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI="
-      crossorigin="anonymous"
-    />
-    <!--end::Third Party Plugin(Bootstrap Icons)-->
-    <!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="{{ asset('template/dist/css/adminlte.css') }}" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{{ asset('login/images/icons/favicon.ico') }}" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('login/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('login/fonts/iconic/css/material-design-iconic-font.min.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/animate/animate.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/css-hamburgers/hamburgers.min.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/animsition/css/animsition.min.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/select2/select2.min.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('login/vendor/daterangepicker/daterangepicker.css') }}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('login/css/util.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('login/css/main.css') }}">
+    <!--===============================================================================================-->
+</head>
+<body>
 
-    <!--end::Required Plugin(AdminLTE)-->
-  </head>
-  <!--end::Head-->
-  <!--begin::Body-->
-  <body class="login-page bg-body-secondary">
-    <div class="login-box">
-      <div class="card card-outline card-primary">
-        <div class="card-header">
-          <a
-            href="../index2.html"
-            class="link-dark text-center link-offset-2 link-opacity-100 link-opacity-50-hover"
-          >
-            <h1 class="mb-0"><b>Log</b>in</h1>
-          </a>
-        </div>
-        <div class="card-body login-card-body">
-          <form action="{{ route('proses_login') }}" method="post">
-            @csrf
-            <div class="input-group mb-1">
-              <div class="form-floating">
-                <input id="loginEmail" type="text" class="form-control" value="" name="username" placeholder="" />
-                <label for="loginEmail">Username</label>
-              </div>
-              <div class="input-group-text"><span class="bi bi-envelope"></span></div>
-            </div>
-            <div class="input-group mb-1">
-              <div class="form-floating">
-                <input id="loginPassword" type="password" class="form-control" name="password" placeholder="" />
-                <label for="loginPassword">Password</label>
-              </div>
-              <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
-            </div>
-            <br>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form" action="{{ route('proses_login') }}" method="POST">
 
-            <!--begin::Row-->
-            <div class="row">
-              <div class="col-8 d-inline-flex align-items-center">
-                {{-- <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                  <label class="form-check-label" for="flexCheckDefault"> Remember Me </label>
-                </div> --}}
-                <a href="{{ route('register') }}" class="btn btn-info">Register</a>
-              </div>
-              <!-- /.col -->
-              <div class="col-4">
-                <div class="d-grid gap-2">
-                  <button type="submit" class="btn btn-primary">Sign In</button>
-                </div>
-              </div>
-              <!-- /.col -->
+                    @csrf
+
+                    <span class="login100-form-title p-b-26">
+                        Login
+                    </span>
+                    {{-- <span class="login100-form-title p-b-48">
+                        <i class="zmdi zmdi-font"></i>
+                    </span> --}}
+
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="text" name="username" required>
+                        <span class="focus-input100" data-placeholder="Username"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <span class="btn-show-pass">
+                            <i class="zmdi zmdi-eye"></i>
+                        </span>
+                        <input class="input100" type="password" name="password" required>
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button type="submit" class="login100-form-btn">
+                                Login
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-center p-t-115">
+                        <span class="txt1">
+                            Don’t have an account?
+                        </span>
+
+                        <a class="txt2" href="{{ route('register') }}">
+                            Sign Up
+                        </a>
+                    </div>
+                </form>
             </div>
-            <!--end::Row-->
-          </form>
-          
         </div>
-        <!-- /.login-card-body -->
-      </div>
     </div>
-    <!-- /.login-box -->
-    <!--begin::Third Party Plugin(OverlayScrollbars)-->
-    <script
-      src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"
-      integrity="sha256-dghWARbRe2eLlIJ56wNB+b760ywulqK3DzZYEpsg2fQ="
-      crossorigin="anonymous"
-    ></script>
-    <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-      crossorigin="anonymous"
-    ></script>
-    <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-      crossorigin="anonymous"
-    ></script>
-    <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-    <script src="{{ asset('template/dist/js/adminlte.js') }}"></script>
 
-    <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
-    <script>
-      const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
-      const Default = {
-        scrollbarTheme: 'os-theme-light',
-        scrollbarAutoHide: 'leave',
-        scrollbarClickScroll: true,
-      };
-      document.addEventListener('DOMContentLoaded', function () {
-        const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
-        if (sidebarWrapper && typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== 'undefined') {
-          OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
-            scrollbars: {
-              theme: Default.scrollbarTheme,
-              autoHide: Default.scrollbarAutoHide,
-              clickScroll: Default.scrollbarClickScroll,
-            },
-          });
-        }
-      });
-    </script>
-    <!--end::OverlayScrollbars Configure-->
-    <!--end::Script-->
-  </body>
-  <!--end::Body-->
+
+    <div id="dropDownSelect1"></div>
+
+    <!--===============================================================================================-->
+    <script src="{{ asset('login/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('login/vendor/animsition/js/animsition.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('login/vendor/bootstrap/js/popper.js') }}"></script>
+    <script src="{{ asset('login/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('login/vendor/select2/select2.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('login/vendor/daterangepicker/moment.min.js') }}"></script>
+    <script src="{{ asset('login/vendor/daterangepicker/daterangepicker.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('login/vendor/countdowntime/countdowntime.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('login/js/main.js') }}"></script>
+
+</body>
 </html>

@@ -29,9 +29,8 @@
                             <thead>
                                 <tr>
                                     <th rowspan="2">No</th>
-                                    <th rowspan="2">NPP</th>
-                                    <th rowspan="2">Nama</th>
-                                    <th rowspan="2">Permintaan</th>
+                                    <th rowspan="2">Nama Pemohon</th>
+                                    <th rowspan="2">Kontak Pemohon</th>
                                     <th colspan="2">Persetujuan</th>
                                     <th rowspan="2">Status</th>
                                     @if(auth()->user()->role == 'manager'||auth()->user()->role == 'managersenior')
@@ -47,16 +46,9 @@
                                 @foreach($drafts as $draft)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $draft->npp }}</td>
-                                    <td>{{ $draft->nama }}</td>
-                                    <td>
-                                        @php
-                                            $data=\App\Models\DraftPermintaan::where('draft_id',$draft->id)->get();
-                                        @endphp
-                                        @foreach($data as $row)
-                                            <span class="badge text-bg-primary">{{$row->permintaan->nama}}</span>
-                                        @endforeach
-                                    </td>
+                                    <td>{{ $draft->nama_pemohon }}</td>
+                                    <td>{{ $draft->kontak_pemohon }}</td>
+                                    
                                     <td>{{ $draft->approval_manager }}</td>
                                     <td>{{ $draft->approval_senior_manager }}</td>
                                     <td>{{ $draft->status }}</td>

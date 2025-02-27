@@ -145,7 +145,9 @@
                                     <div class="row ">
                                         @if($draft->count() != 0)
                                             <button type="button" class="btn btn-primary btn-block" disabled>Tambah</button>
-                                        @endif
+                                        @else
+                                            <button type="button" class="btn btn-primary btn-block" >Tambah</button>
+                                            @endif
                                     </div>
                                 </div>
                                 <div class="col-md-8">

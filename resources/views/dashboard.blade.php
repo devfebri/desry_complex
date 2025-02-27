@@ -67,9 +67,9 @@
                                         <label for="kontak_pemohon" class="col-sm-4 col-form-label">Kontak Pemohon</label>
                                         <div class="col-sm-8">
                                             @if($draft->count() != 0)
-                                            <input type="text" class="form-control" name="kontak_pemohon" id="kontak_pemohon" value="{{ $draft[0]->kontak_pemohon }}" required />
+                                            <input type="number" class="form-control" name="kontak_pemohon" id="kontak_pemohon" value="{{ $draft[0]->kontak_pemohon }}" required />
                                             @else
-                                            <input type="text" class="form-control" name="kontak_pemohon" id="kontak_pemohon" required />
+                                            <input type="number" class="form-control" name="kontak_pemohon" id="kontak_pemohon" required />
                                             @endif
                                         </div>
                                     </div>

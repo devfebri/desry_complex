@@ -31,14 +31,14 @@
                         <div class="card-body">
                             <div class=" m-b-20">
                                 <div class="row text-center justify-content-center" >
-                                    <div @if($data->approval_manager=='disetujui') style="background-color: rgb(89, 255, 89);" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2" >
+                                    <div @if($data->approval_manager=='disetujui') style="background-color: #0d6efd;" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2" >
 
                                         <div class="card-body">
                                             <b>Manager</b> <br>
                                             <h5 class="badge badge-pill badge-success"><b><i>{{ $data->approval_manager }}</i></b> </h5>
                                         </div>
                                     </div>
-                                    <div @if($data->approval_senior_manager=='disetujui') style="background-color: rgb(89, 255, 89);" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2" >
+                                    <div @if($data->approval_senior_manager=='disetujui') style="background-color: #0d6efd;" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2" >
 
                                         <div class="card-body">
                                             <b>Senior Manager</b> <br>
@@ -46,7 +46,7 @@
 
                                         </div>
                                     </div>
-                                     <div @if($data->approval_teknisi=='selesai') style="background-color: rgb(89, 255, 89);" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2">
+                                     <div @if($data->approval_teknisi=='selesai') style="background-color: #0d6efd;" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2">
 
                                          <div class="card-body">
                                              <b>Teknisi</b> <br>
@@ -55,7 +55,8 @@
                                          </div>
                                      </div>
 
-                                    <div @if($data->approval_manager_it=='selesai') style="background-color: rgb(89, 255, 89);" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2">
+                                    <div @if($data->approval_manager_it=='selesai') style="background-color: #0d6efd;" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2">
+
 
                                         <div class="card-body">
                                             <b>Manager IT</b> <br>
@@ -63,7 +64,8 @@
 
                                         </div>
                                     </div>
-                                    <div @if($data->approval_senior_manager_it=='disetujui') style="background-color: rgb(89, 255, 89);" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-3">
+                                    <div @if($data->approval_senior_manager_it=='disetujui') style="background-color: #0d6efd;" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-3">
+
 
 
 
@@ -119,12 +121,9 @@
 
                                 </div>
                                 @if($data->waktu_pengambilan != null)
-                                <div class="col-sm-12 col-lg-5">
-                                    <div class="card  bg-info text-center">
-                                        <div class="card-body">
-
-                                            <h5 class="card-text">Waktu Pengambilan :<br>{{ $data->waktu_pengambilan->translatedFormat('l, d-m-Y') }}</h5>
-                                        </div>
+                                <div class="col-sm-12 col-lg-4">
+                                    <div class="badge badge-primary bg-primary text-center ">
+                                        <p class="text-white" s>Waktu Pengambilan : {{ $data->waktu_pengambilan->translatedFormat('l, d-m-Y') }}</p>
                                     </div>
                                 </div>
                                 @endif
@@ -200,7 +199,7 @@
 
                             </div>
                             <input type="hidden" name="draft_id" value="{{ $data->id }}">
-                            <table id="draftTable" class="table table-bordered table-striped">
+                            <table id="draftTable" class="table table-bordered table-striped text-center">
                                 <thead>
                                     <tr>
                                         <th rowspan="2">No</th>
@@ -222,15 +221,15 @@
                                 <tbody>
                                     @foreach($drafts as $key=>$draft)
                                     <tr>
-                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif>{{ ++$key }}</td>
-                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif>{{ $draft->nama}}</td>
-                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif>{{ $draft->npp}}</td>
-                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif>{{ $draft->permintaan->nama }}</td>
-                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif>{{ $draft->keterangan }}</td>
-                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif><center><input type="radio" required approval='settingtable' role='admin' value='disetujui' @if(auth()->user()->role!='admin') disabled @endif @if($draft->approval_teknisi=='disetujui') checked disabled @endif  name="app-s-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
-                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif><center><input type="radio" required approval='settingtable' role='admin' value='tidak disetujui' @if(auth()->user()->role!='admin') disabled @endif @if($draft->approval_teknisi=='tidak disetujui') checked disabled @endif name="app-s-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
-                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif><center><input type="radio" required approval='settingtable' role='managerit' value='disetujui' @if(auth()->user()->role!='managerit') disabled @endif @if($draft->approval_manager_it=='disetujui') checked disabled @endif name="app-m-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
-                                        <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif><center><input type="radio" required approval='settingtable' role='managerit' value='tidak disetujui' @if(auth()->user()->role!='managerit') disabled @endif @if($draft->approval_manager_it=='tidak disetujui') checked disabled @endif name="app-m-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
+                                        <td><center>{{ ++$key }}</center></td>
+                                        <td>{{ $draft->nama}}</td>
+                                        <td>{{ $draft->npp}}</td>
+                                        <td>{{ $draft->permintaan->nama }}</td>
+                                        <td>{{ $draft->keterangan }}</td>
+                                        <td><center><input type="radio" required approval='settingtable' role='admin' value='disetujui' @if(auth()->user()->role!='admin') disabled @endif @if($draft->approval_teknisi=='disetujui') checked disabled @endif  name="app-s-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
+                                        <td><center><input type="radio" required approval='settingtable' role='admin' value='tidak disetujui' @if(auth()->user()->role!='admin') disabled @endif @if($draft->approval_teknisi=='tidak disetujui') checked disabled @endif name="app-s-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
+                                        <td><center><input type="radio" required approval='settingtable' role='managerit' value='disetujui' @if(auth()->user()->role!='managerit') disabled @endif @if($draft->approval_manager_it=='disetujui') checked disabled @endif name="app-m-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
+                                        <td><center><input type="radio" required approval='settingtable' role='managerit' value='tidak disetujui' @if(auth()->user()->role!='managerit') disabled @endif @if($draft->approval_manager_it=='tidak disetujui') checked disabled @endif name="app-m-it-{{ $draft->id }}" style="padding:10px;" class="form-check-input"></center></td>
                                         <td  @if($draft->status=='disetujui') style="background-color: rgb(89, 255, 89);" @elseif($draft->status=='tidak disetujui') style="background-color: rgb(255, 89, 89);" @endif>{{$draft->status}}</td>
                                     </tr>
                                     @endforeach
@@ -278,16 +277,16 @@
             "paging": true,
             "autoWidth": false,
             "columnDefs": [
-                { "width": "10%", "targets": 0 },
+                { "width": "5%", "targets": 0 },
                 { "width": "20%", "targets": 1 },
                 { "width": "10%", "targets": 2 },
-                { "width": "20%", "targets": 3 },
+                { "width": "10%", "targets": 3 },
                 { "width": "20%", "targets": 4 },
                 { "width": "10%", "targets": 5 },
                 { "width": "10%", "targets": 6 },
                 { "width": "10%", "targets": 7 },
                 { "width": "10%", "targets": 8 },
-                { "width": "10%", "targets": 9 }
+                { "width": "20%", "targets": 9 }
             ]
         });
         $('#setingtable1').on('click', function() {

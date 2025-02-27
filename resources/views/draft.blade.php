@@ -25,7 +25,7 @@
                 <div class="card mb-4">
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="draftTable" class="table table-bordered table-striped">
+                        <table id="draftTable" class="table table-bordered table-striped text-center">
                             <thead>
                                 <tr>
                                     <th rowspan="2">No</th>
@@ -43,9 +43,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($drafts as $draft)
+                                @foreach($drafts as $key=>$draft)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td><center>{{ ++$key }}</center></td>
                                     <td>{{ $draft->nama_pemohon }}</td>
                                     <td>{{ $draft->kontak_pemohon }}</td>
                                     

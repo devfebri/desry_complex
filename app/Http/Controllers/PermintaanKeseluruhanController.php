@@ -14,7 +14,7 @@ class PermintaanKeseluruhanController extends Controller
         if(auth()->user()->role=='user'){
             $drafts = Draft::where('user_id',auth()->user()->id)->get(); // Fetch all drafts
         }else{
-            $drafts = Draft::where('status','proses IT')->orWhere('status','selesai')->orWhere('status','proses SM IT')->get(); // Fetch all drafts
+            $drafts = Draft::where('status','proses IT')->orWhere('status','selesai')->orWhere('status','proses SM IT')->orWhere('status','permintaan diproses')->get(); // Fetch all drafts
         }
         return view('permintaankeseluruhan',compact('drafts'));
     }

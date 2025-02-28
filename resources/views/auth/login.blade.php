@@ -32,6 +32,16 @@
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <form class="login100-form validate-form" action="{{ route('proses_login') }}" method="POST">
 
                     @csrf
@@ -44,7 +54,7 @@
                     </span> --}}
 
                     <div class="wrap-input100 validate-input">
-                        <input class="input100" type="text" name="username" required>
+                        <input class="input100" type="text" name="username" required autocomplete="off">
                         <span class="focus-input100" data-placeholder="Username"></span>
                     </div>
 
@@ -52,7 +62,7 @@
                         <span class="btn-show-pass">
                             <i class="zmdi zmdi-eye"></i>
                         </span>
-                        <input class="input100" type="password" name="password" required>
+                        <input class="input100" type="password" name="password" required autocomplete="off">
                         <span class="focus-input100" data-placeholder="Password"></span>
                     </div>
 

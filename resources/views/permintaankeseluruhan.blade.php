@@ -25,8 +25,8 @@
                 <div class="card mb-4">
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="draftTable" class="table table-bordered table-striped">
-                            <thead>
+                        <table id="draftTable" class=" table-bordered table-striped">
+                            <thead class="bg-primary text-white">
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Pemohon</th>

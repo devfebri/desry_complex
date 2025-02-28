@@ -123,7 +123,7 @@
                                 @if($data->waktu_pengambilan != null)
                                 <div class="col-sm-12 col-lg-4">
                                     <div class="badge badge-primary bg-primary text-center ">
-                                        <p class="text-white" s>Waktu Pengambilan : {{ $data->waktu_pengambilan->translatedFormat('l, d-m-Y') }}</p>
+                                        <h5 class="text-white" >Waktu Pengambilan : {{ $data->waktu_pengambilan->translatedFormat('l, d-m-Y') }}</h5>
                                     </div>
                                 </div>
                                 @endif
@@ -199,8 +199,8 @@
 
                             </div>
                             <input type="hidden" name="draft_id" value="{{ $data->id }}">
-                            <table id="draftTable" class="table table-bordered table-striped text-center">
-                                <thead>
+                            <table id="draftTable" class=" table-bordered table-striped text-center">
+                                <thead class="bg-primary text-white">
                                     <tr>
                                         <th rowspan="2">No</th>
                                         <th rowspan="2">Nama</th>

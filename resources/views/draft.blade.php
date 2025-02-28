@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
 <div class="app-content-header">
     <!--begin::Container-->
@@ -25,21 +26,22 @@
                 <div class="card mb-4">
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="draftTable" class="table table-bordered table-striped text-center">
-                            <thead>
-                                <tr>
-                                    <th rowspan="2">No</th>
-                                    <th rowspan="2">Nama Pemohon</th>
-                                    <th rowspan="2">Kontak Pemohon</th>
-                                    <th colspan="2">Persetujuan</th>
-                                    <th rowspan="2">Status</th>
+                        <table id="draftTable" class=" table-bordered table-striped text-center">
+                            <thead class="bg-primary text-white text-center">
+                                <tr >
+                                    <th rowspan="2" class="text-center">No</th>
+                                    <th rowspan="2" class="text-center">Nama Pemohon</th>
+                                    <th rowspan="2" class="text-center">Kontak Pemohon</th>
+                                    <th colspan="2" class="text-center">Persetujuan</th>
+                                    <th rowspan="2" class="text-center">Status</th>
+
                                     @if(auth()->user()->role == 'manager'||auth()->user()->role == 'managersenior')
                                     <th rowspan="2">Approval</th>
                                     @endif
                                 </tr>
                                 <tr>
-                                    <th>Manager</th>
-                                    <th>Senior Manager</th>
+                                    <th  class="text-center">Manager</th>
+                                    <th  class="text-center">Senior Manager</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,6 +91,8 @@
         $('#draftTable').DataTable({
             "scrollX": true
         });
+       
+
 
     });
 </script>

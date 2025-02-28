@@ -42,8 +42,8 @@
                     <!-- /.card-header -->
                     
                     <div class="card-body">
-                        <table id="userTable" class="table table-bordered table-striped">
-                            <thead>
+                        <table id="userTable" class=" table-bordered table-striped text-center">
+                            <thead class="bg-primary text-white">
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
@@ -69,7 +69,7 @@
                                    
                                 @endphp
                                 <tr>
-                                    <td>{{ ++$key }}</td>
+                                    <td><center>{{ ++$key }}</center></td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->role }}</td>
                                     <td>{{ $manager }}</td>

@@ -11,39 +11,26 @@ class AuthController extends Controller
     
     public function login()
     {
-        // MessageCreated::dispatch('Mntulll');
-        // event(new MessageCreated);
         return view('auth.login');
     }
     public function proses_login(Request $request)
     {
-        if($request->remember===null){
-            setcookie('username',$request->username,100);
-            setcookie('password',$request->password,100);
-        }else{
-            // dd('ok');
-            setcookie('username',$request->username,time()+60*60*24*100);
-            setcookie('password',$request->password,time()+60*60*24*100);
-        }
-        // dd($request->all());
-
-
+        // Ensure that cookies for username and password are not saved
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-        //    dd('ok');
            
             if(Auth::user()->role=='user'){
-                return redirect(route(auth()->user()->role.'_dashboard'))->with('pesan','Selamat datang kembali "'.auth()->user()->name.'"');
+                return redirect(route(auth()->user()->role.'_dashboard'))->with('success', 'Login successful!')->with('pesan','Selamat datang kembali "'.auth()->user()->name.'"');
 
             }
             else if(Auth::user()->role=='manager' || Auth::user()->role=='managersenior'||Auth::user()->role=='admin'){ 
-                return redirect(route(auth()->user()->role.'_draft'))->with('pesan','Selamat datang kembali "'.auth()->user()->name.'"');
+                return redirect(route(auth()->user()->role.'_draft'))->with('success', 'Login successful!')->with('pesan','Selamat datang kembali "'.auth()->user()->name.'"');
             }
             else if(Auth::user()->role=='managerit' || Auth::user()->role=='managerseniorit'){ 
-                return redirect(route(auth()->user()->role.'_permintaankeseluruhan'))->with('pesan','Selamat datang kembali "'.auth()->user()->name.'"');
+                return redirect(route(auth()->user()->role.'_permintaankeseluruhan'))->with('success', 'Login successful!')->with('pesan','Selamat datang kembali "'.auth()->user()->name.'"');
             }
             
         } else {
-            return redirect('/')->with('gagal','Periksa Username dan Password anda');
+            return redirect('/')->with('error', 'Invalid username or password.')->with('gagal','Periksa Username dan Password anda');
         }
 
         return redirect()->back();
@@ -67,23 +54,22 @@ class AuthController extends Controller
             'role' => 'user'
         ]);
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-        //    dd('ok');
             if(Auth::user()->role=='manager'){
-                return redirect(route(auth()->user()->role.'_draft'))->with('pesan','Selamat datang kembali "'.auth()->user()->name.'"');
+                return redirect(route(auth()->user()->role.'_draft'))->with('success', 'Registration successful!')->with('pesan','Selamat datang kembali "'.auth()->user()->name.'"');
 
             }else{
 
-                return redirect(route(auth()->user()->role.'_dashboard'))->with('pesan','Selamat datang kembali "'.auth()->user()->name.'"');
+                return redirect(route(auth()->user()->role.'_dashboard'))->with('success', 'Registration successful!')->with('pesan','Selamat datang kembali "'.auth()->user()->name.'"');
             }
 
         } else {
-            return redirect('/')->with('gagal','Periksa Username dan Password anda');
+            return redirect('/')->with('error', 'Registration failed.')->with('gagal','Periksa Username dan Password anda');
         }
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect('/');
+        return redirect('/')->with('success', 'Logout successful!');
     }
 }

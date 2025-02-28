@@ -43,9 +43,9 @@
                      <!-- /.card-header -->
                      
                      <div class="card-body">
-                         <table id="permintaanTable" class="table table-bordered table-striped">
+                         <table id="permintaanTable" class=" table-bordered table-striped text-center">
 
-                             <thead>
+                             <thead class="bg-primary text-white">
                                  <tr>
                                      <th>No</th>
                                      <th>Nama</th>
@@ -55,7 +55,7 @@
                              <tbody>
                                  @foreach($permintaans as $key=>$permintaan)
                                  <tr>
-                                     <td>{{ ++$key }}</td>
+                                     <td><center>{{ ++$key }}</center></td>
                                      <td>{{ $permintaan->nama }}</td>
                                      <td>
                                          

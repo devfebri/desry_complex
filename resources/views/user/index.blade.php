@@ -4,11 +4,11 @@
     <!--begin::Container-->
     <div class="container-fluid">
         <!--begin::Row-->
-        <div class="row">
+        {{-- <div class="row">
             <center>
                 <h3>Setting Data User</h3>
             </center>
-        </div>
+        </div> --}}
         <!--end::Row-->
     </div>
     <!--end::Container-->
@@ -33,7 +33,12 @@
             <!--begin::Col-->
             <div class="col-md-12">
                 <div class="card mb-4">
+
                     <div class="card-header">
+                        <div class="card-title">
+                            <h3>Permintaan Keseluruhan Fasilitas IT</h3>
+                        </div>
+
                         <div class="card-tools">
                             <a href="{{ route(auth()->user()->role.'_user.create') }}" class="btn btn-primary">Tambah Data</a>
 
@@ -45,12 +50,12 @@
                         <table id="userTable" class=" table-bordered table-striped text-center">
                             <thead class="bg-primary text-white">
                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Role</th>
-                                    <th>Manager</th>
-                                    <th>Senior Manager</th>
-                                    <th>Actions</th>
+                                    <th  class="text-center">No</th>
+                                    <th  class="text-center">Nama</th>
+                                    <th  class="text-center">Role</th>
+                                    <th  class="text-center">Manager</th>
+                                    <th  class="text-center">Senior Manager</th>
+                                    <th  class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>

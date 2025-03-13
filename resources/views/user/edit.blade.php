@@ -60,10 +60,13 @@
                                 <select name="role" id="role" class="form-control" required>
                                     <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
                                     <option value="manager" {{ $user->role == 'manager' ? 'selected' : '' }}>Manager</option>
-                                    <option value="senior_manager" {{ $user->role == 'senior_manager' ? 'selected' : '' }}>Senior Manager</option>
+                                    <option value="managersenior" {{ $user->role == 'managersenior' ? 'selected' : '' }}>Senior Manager</option>
+                                    <option value="managerit" {{ $user->role == 'managerit' ? 'selected' : '' }}>Manager IT</option>
+                                    <option value="managerseniorit" {{ $user->role == 'managerseniorit' ? 'selected' : '' }}>Senior Manager IT</option>
                                     <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
                                 </select>
                             </div>
+                            @if($user->role=='user')
                             <div class="mb-3">
                                 <label for="email" class="form-label">Manager</label>
                                 <select name="manager_id" id="manager_id" class="form-control" required>
@@ -82,10 +85,11 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="mb-3">
+                            @endif
+                            {{-- <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="password" name="password" required>
-                            </div>
+                            </div> --}}
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>

@@ -32,13 +32,13 @@
                         <p>Draft</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route(auth()->user()->role.'_permintaankeseluruhan') }}" class="nav-link">
                         <i class="nav-icon bi bi-palette "></i>
                         <p>Permintaan Keseluruhan</p>
 
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon bi bi-speedometer"></i>
@@ -76,29 +76,11 @@
                         <p>Draft</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route(auth()->user()->role.'_permintaankeseluruhan') }}" class="nav-link">
-                        <i class="nav-icon bi bi-palette "></i>
-                        <p>Permintaan Keseluruhan</p>
-
-                    </a>
-                </li>
-
-
-                @elseif(auth()->user()->role=='manager'||auth()->user()->role=='managersenior'))
+                @elseif(auth()->user()->role=='manager'||auth()->user()->role=='managersenior'||auth()->user()->role=='managerit'||auth()->user()->role=='managerseniorit')
                  <li class="nav-item">
                     <a href="{{ route(auth()->user()->role.'_draft') }}" class="nav-link">
                         <i class="nav-icon bi bi-palette "></i>
                         <p>Draft</p>
-                    </a>
-                </li>
-                @elseif(auth()->user()->role=='managerit'||auth()->user()->role=='managerseniorit'))
-
-                <li class="nav-item">
-                    <a href="{{ route(auth()->user()->role.'_permintaankeseluruhan') }}" class="nav-link">
-                        <i class="nav-icon bi bi-palette "></i>
-                        <p>Permintaan Keseluruhan</p>
-
                     </a>
                 </li>
                 @endif

@@ -4,11 +4,11 @@
     <!--begin::Container-->
     <div class="container-fluid">
         <!--begin::Row-->
-        <div class="row">
+        {{-- <div class="row">
             <center>
                 <h3>Detail Permintaan Fasilitas IT</h3>
             </center>
-        </div>
+        </div> --}}
         <!--end::Row-->
     </div>
     <!--end::Container-->
@@ -23,6 +23,11 @@
             <!--begin::Col-->
             <div class="col-md-12">
                 <div class="card mb-4">
+                     <div class="card-header">
+                        <div class="card-title">
+                            <h3>Detail Permintaan Fasilitas IT</h3>
+                        </div>
+                     </div>
                     <!-- /.card-header -->
                     @if(auth()->user()->role!='user')
                     <form action="{{ route(auth()->user()->role.'_permintaankeseluruhan_submit') }}" method="post">
@@ -31,47 +36,57 @@
                         <div class="card-body">
                             <div class=" m-b-20">
                                 <div class="row text-center justify-content-center" >
-                                    <div @if($data->approval_manager=='disetujui') style="background-color: #0d6efd;" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2" >
-
+                                    <div @if($data->approval_manager=='disetujui') style="background-color: #0d6efd;" @elseif($data->approval_manager=='tidak disetujui') style="background-color: #ff5733;" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2" >
                                         <div class="card-body">
                                             <b>Manager</b> <br>
-                                            <h5 class="badge badge-pill badge-success"><b><i>{{ $data->approval_manager }}</i></b> </h5>
+                                            <h6 style="color:white"><b><i>{{ $data->approval_manager }}</i></b> </h6>
+                                            <h6 style="font-size:12px;color:white">{{ $data->tanggal_approval_manager }}</h6>
+
+                                            @if($data->ket_manager!=null)
+                                            <h6 style="font-size:12px;color:white">{{ $data->ket_manager }}</h6>
+                                            @endif
                                         </div>
                                     </div>
-                                    <div @if($data->approval_senior_manager=='disetujui') style="background-color: #0d6efd;" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2" >
-
+                                    <div @if($data->approval_senior_manager=='disetujui') style="background-color: #0d6efd;" @elseif($data->approval_senior_manager=='tidak disetujui') style="background-color: #ff5733;" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2" >
                                         <div class="card-body">
                                             <b>Senior Manager</b> <br>
-                                            <h5 class="badge badge-pill badge-success"><b><i>{{ $data->approval_senior_manager }}</i></b> </h5>
-
+                                            <h6 style="color:white"><b><i>{{ $data->approval_senior_manager }}</i></b> </h6>
+                                            <h6 style="font-size:12px;color:white">{{ $data->tanggal_approval_sm }}</h6>
+                                            @if($data->ket_sm!=null)
+                                            <h6 style="font-size:12px;color:white">{{ $data->ket_sm }}</h6>
+                                            @endif
                                         </div>
                                     </div>
-                                     <div @if($data->approval_teknisi=='selesai') style="background-color: #0d6efd;" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2">
-
+                                     <div @if($data->approval_teknisi=='disetujui') style="background-color: #0d6efd;" @elseif($data->approval_teknisi=='tidak disetujui') style="background-color: #ff5733;" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2">
                                          <div class="card-body">
                                              <b>Teknisi</b> <br>
-                                             <h5 class="badge badge-pill badge-success"><b><i>{{ $data->approval_teknisi }}</i></b> </h5>
-
+                                             <h6 style="color:white"><b><i>{{ $data->approval_teknisi }}</i></b> </h6>
+                                             <h6 style="font-size:12px;color:white">{{ $data->tanggal_approval_teknisi }}</h6>
+                                             @if($data->ket_teknisi!=null)
+                                             <h6 style="font-size:12px;color:white">{{ $data->ket_teknisi }}</h6>
+                                             @endif
                                          </div>
                                      </div>
-
-                                    <div @if($data->approval_manager_it=='selesai') style="background-color: #0d6efd;" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2">
-
-
+                                    <div @if($data->approval_manager_it=='disetujui') style="background-color: #0d6efd;" @elseif($data->approval_manager_it=='tidak disetujui') style="background-color: #ff5733;" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-2">
                                         <div class="card-body">
                                             <b>Manager IT</b> <br>
-                                            <h5 class="badge badge-pill badge-success"><b><i>{{ $data->approval_manager_it }}</i></b> </h5>
+                                            <h6 style="color:white"><b><i>{{ $data->approval_manager_it }}</i></b> </h6>
+                                            <h6 style="font-size:12px;color:white">{{ $data->tanggal_approval_manager_it }}</h6>
 
+                                            @if($data->ket_manager_it!=null)
+                                            <h6 style="font-size:12px;color:white">{{ $data->ket_manager_it }}</h6>
+                                            @endif
                                         </div>
                                     </div>
-                                    <div @if($data->approval_senior_manager_it=='disetujui') style="background-color: #0d6efd;" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-3">
-
-
-
-
+                                    <div @if($data->approval_senior_manager_it=='disetujui') style="background-color: #0d6efd;" @elseif($data->approval_senior_manager_it=='tidak disetujui') style="background-color: #ff5733;" @else style="background-color: rgb(126, 126, 126);" @endif class="col-sm-3">
                                         <div class="card-body">
                                             <b>Senior Manager IT</b> <br>
-                                            <h5 class="badge badge-pill badge-success"><b><i>{{ $data->approval_senior_manager_it }}</i></b> </h5>
+                                            <h6 style="color:white"><b><i>{{ $data->approval_senior_manager_it }}</i></b> </h6>
+                                            <h6 style="font-size:12px;color:white">{{ $data->tanggal_approval_sm_it }}</h6>
+
+                                            @if($data->ket_sm_it!=null)
+                                            <h6 style="font-size:12px;color:white">{{ $data->ket_sm_it }}</h6>
+                                            @endif
 
                                         </div>
                                     </div@>
@@ -84,8 +99,6 @@
                             <div class="row justify-content-center mt-2">
                                 <div class="col-sm-12 col-lg-5">
                                     <table style=" width: 100%;">
-
-
                                         <tr>
                                             <td><b>Nama Pemohon</b></td>
                                             <td>:</td>
@@ -115,16 +128,32 @@
                                         <tr>
                                             <td><b>Status</b> </td>
                                             <td>:</td>
-                                            <td>{{ $data->status }}</td>
+                                            <td>
+                                                
+                                                <b>{{$data->status}}</b>
+                                                @if($data->status=='selesai')
+                                                <br>
+                                                Permintaan sudah di ambil pada tanggal <br> <b>{{$data->tanggal_diambil->format('d/m/Y H:i:s')}}</b>
+
+                                                @endif
+                                            </td>
                                         </tr>
                                     </table>
 
                                 </div>
                                 @if($data->waktu_pengambilan != null)
-                                <div class="col-sm-12 col-lg-4">
-                                    <div class="badge badge-primary bg-primary text-center ">
-                                        <h5 class="text-white" >Waktu Pengambilan : {{ $data->waktu_pengambilan->translatedFormat('l, d-m-Y') }}</h5>
+                                <div class="col-sm-12 col-lg-4 text-center">
+                                    @if ($data->status != 'selesai')
+                                        
+                                    <div class="badge badge-secondary bg-warning">
+                                        <h5 class="text-black" >Waktu Pengambilan : {{ $data->waktu_pengambilan->translatedFormat('l, d-m-Y') }}</h5>
                                     </div>
+                                    @endif
+                                    @if(auth()->user()->role=='admin'&&$data->tanggal_diambil==null)
+                                    <div class="badge badge-secondary  ">
+                                        <a href="{{ route('admin_draft_disetujui',$data->id) }}" onclick="return confirm('Apakah anda yakin ingin menutup permintaan ini ?')" class="btn btn-primary btn-sm ">Tandai Sudah diambil</a>
+                                    </div>
+                                    @endif
                                 </div>
                                 @endif
                             </div>
@@ -170,7 +199,7 @@
 
                                         </div>
                                     </div>
-                                @elseif(auth()->user()->role=='managerseniorit')
+                                @elseif(auth()->user()->role=='managerseniorit'||auth()->user()->role=='manager'||auth()->user()->role=='managersenior')
                                 <div class="col-sm-12 col-lg-3">
                                     <div class="form-check ">
                                         @if($data->approval_senior_manager_it=='proses')
@@ -194,8 +223,16 @@
                                         <label class="form-check-label" for="tolak"> Tolak Permohonan </label>
                                     </div>
                                 </div>
+                               
 
                                 @endif
+
+                            </div>
+                            <div class="row justify-content-center mt-2">
+
+                                 <div class="col-sm-12 col-lg-3">
+                                     <textarea name="ket" id="ket" class="form-control" cols="30" rows="1" placeholder="Keterangan"></textarea>
+                                 </div>
 
                             </div>
                             <input type="hidden" name="draft_id" value="{{ $data->id }}">
@@ -235,24 +272,28 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            @if($data->approval_manager_it=='proses' && auth()->user()->role=='managerit')
-                            <button type="submit" class="btn btn-primary btn-block col-12">Simpan</button>
+                            @if($data->status=='proses')
+                                @if($data->approval_manager_it=='proses' && auth()->user()->role=='managerit' )
+                                <button type="submit" class="btn btn-primary btn-block col-12">Simpan</button>
+                                @elseif($data->approval_teknisi=='proses'&& auth()->user()->role=='admin' )
+                                <button type="submit" class="btn btn-primary btn-block col-12" >Simpan</button>
+                                @elseif($data->approval_senior_manager_it=='proses'&& auth()->user()->role=='managerseniorit' )
+                                <button type="submit" class="btn btn-primary btn-block col-12">Simpan</button>
+                                @elseif($data->approval_senior_manager=='proses'&& auth()->user()->role=='managersenior'  )
+                                <button type="submit" class="btn btn-primary btn-block col-12">Simpan</button>
+                                @elseif($data->approval_manager=='proses'&& auth()->user()->role=='manager' )
+                                <button type="submit" class="btn btn-primary btn-block col-12">Simpan</button>
 
-
-                            @elseif($data->approval_teknisi=='proses'&& auth()->user()->role=='admin')
-
-
-                            <button type="submit" class="btn btn-primary btn-block col-12" >Simpan</button>
-                            @elseif($data->approval_senior_manager_it=='proses'&& auth()->user()->role=='managerseniorit')
-                            <button type="submit" class="btn btn-primary btn-block col-12">Simpan</button>
-                            @elseif(auth()->user()->role=='user')
+                                @else
+                                <button type="submit" class="btn btn-primary btn-block col-12" disabled>Simpan</button>
+                                @endif
                             @else
-                            <button type="submit" class="btn btn-primary btn-block col-12" disabled>Simpan</button>
+                                <button type="submit" class="btn btn-primary btn-block col-12" disabled>Simpan</button>
                             @endif
                         </div>
-                        @if(auth()->user()->role=='user')
+                        {{-- @if(auth()->user()->role=='user') --}}
                     </form>
-                    @endif
+                    {{-- @endif --}}
 
                    
                 </div>

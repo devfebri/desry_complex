@@ -33,29 +33,11 @@
 
 
 
-                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-                    <!--begin::User Image-->
-                    {{-- <li class="user-header text-bg-primary">
-                        <img src="{{ asset('template/dist/assets/img/user2-160x160.jpg') }}" class="rounded-circle shadow" alt="User Image" />
-                        <p>
-                            {{ auth()->user()->name }}
-                        </p>
-                    </li> --}}
-                    <!--end::User Image-->
-                    <!--begin::Menu Body-->
-                    {{-- <li class="user-body">
-
-                        <!--end::Row-->
-                    </li> --}}
-                    <!--end::Menu Body-->
-                    <!--begin::Menu Footer-->
+                {{-- <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                     <li class="user-footer">
-                        {{-- <a href="#" class="btn btn-default btn-flat">Profile</a> --}}
                         <a href="{{route('logout')}}" class="btn btn-default btn-flat float-end">Sign out</a>
-
                     </li>
-                    <!--end::Menu Footer-->
-                </ul>
+                </ul> --}}
             </li>
 
              <li nav-item dropdown user-menu>

@@ -23,8 +23,9 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'password' => 'min:6',
         ]);
+       
 
         User::create($request->all());
         return redirect()->route('user.index')->with('success', 'User created successfully.');
@@ -42,8 +43,9 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             // 'email' => 'required|email|unique:users,email,' . $user->email,
-            'password' => 'nullable',
+            // 'password' => 'nullable',
         ]);
+        // dd($request->all());
         // dd($request->all());
         
         $user->update($request->all());

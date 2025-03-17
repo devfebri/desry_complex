@@ -12,6 +12,5 @@ class Users extends Model
     /**
      * The object classes of the LDAP model.
      */
-    protected ?string $connection = 'usersldap';
     public static array $objectClasses = [];
 }

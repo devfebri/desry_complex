@@ -13,7 +13,33 @@ class AuthController extends Controller
     {
         return view('auth.login');
     }
-    public function proses_login(Request $request)
+    // public function username()
+    // {
+    //     return 'username';
+    // }
+    public function proses_login(Request $request){
+        
+        $credentials = [
+            'uid' => $request->username,
+            'password' => $request->password,
+            'fallback' => [
+                'username' => $request->username,
+                'password' => $request->password,
+            ],
+        ];
+        // return 'username';
+        if (Auth::attempt($credentials)) {
+            // dd('ok');
+            return redirect('/home')->with('gagal', 'Periksa Username dan Password anda');
+        
+            // return redirect(route(auth()->user()->role . '_permohonan'))->with('pesan', 'Selamat datang kembali "' . auth()->user()->name . '"');
+        } else {
+            return redirect('/')->with('gagal', 'Periksa Username dan Password anda');
+        }
+        return redirect()->back();
+    }
+
+    public function proses_logins(Request $request)
     {
        
         $credentialsDefault = [

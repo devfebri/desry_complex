@@ -25,6 +25,23 @@ class LoginController extends Controller
      *
      * @var string
      */
+    
+    public function username()
+    {
+        return 'username';
+    }
+
+    protected function credentials(Request $request)
+    {
+        return [
+            'uid' => $request->username,
+            'password' => $request->password,
+            'fallback' => [
+                'username' => $request->username,
+                'password' => $request->password,
+            ],
+        ];
+    }
     protected $redirectTo = '/home';
 
     /**

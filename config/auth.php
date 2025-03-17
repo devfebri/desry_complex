@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'usersdefault',
+        'guard' => 'roleuser',
         'passwords' => 'users',
     ],
 
@@ -36,13 +36,9 @@ return [
     */
 
     'guards' => [
-        'usersldap' => [
+        'roleuser' => [
             'driver' => 'session',
-            'provider' => 'usersldap',
-        ],
-        'usersdefault' => [
-            'driver' => 'session',
-            'provider' => 'usersdefault',
+            'provider' => 'users',
         ],
     ],
 
@@ -64,29 +60,33 @@ return [
     */
 
     'providers' => [
-        'usersldap' => [
+        'users' => [
             'driver' => 'ldap',
-            'model' => LdapRecord\Models\OpenLDAP\User::class,
+            'model' =>  LdapRecord\Models\OpenLDAP\User::class,
+            'rules' => [
+                App\Ldap\Rules\OnlyUsers::class, // <-- Added here.
+            ],
             'database' => [
                 'model' => App\Models\User::class,
                 'sync_passwords' => true,
                 'sync_attributes' => [
                     'name' => 'cn',
                     'username' => 'uid',
-                    'email' => 'krb5PrincipalName',
+                    'email' => 'mail',
+                    'role' => 'cn',
                 ],
                 'sync_existing' => [
                     'username' => 'uid',
                 ],
                 'password_column' => 'password',
+
             ],
-
         ],
-
-        'usersdefault' => [
-            'driver' => 'database',
-            'table' => 'users',
-        ],
+        
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
     ],
 
     /*
